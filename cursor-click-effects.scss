@@ -1,0 +1,199 @@
+/*
+! Можно удалить (внешний вид кнопок)
+*/
+button {
+    font-weight: 600;
+    font-size: 16px;
+    height: 60px;
+    width: 240px;
+    border-radius: 50px;
+    color: #ffffff;
+    background: linear-gradient(180deg, #81B5FF 0%, #4A83DF 100%);
+    text-shadow: 0 1px 2px #28477597;
+    box-shadow: 0 2px 0 0 #31568d;
+    border: none;
+    margin: 10px 5px;
+    outline: none !important;
+    cursor: pointer;
+}
+/*
+! А это важные стили
+*/
+// * Переменные
+$cursor-effect-diameter: 70px;
+$cursor-effect-center: translate(-50%, -50%);
+$cursor-effect-z-index: 1000000;
+$cursor-effects-count: 16;
+$frame-size: 6.666%;
+
+// * Массивы
+// Массив с ключевыми словами эффектов
+$cursorEffectNames:
+// Для покупки
+'money', // 1
+'gems', // 2
+// Для такси
+'wheel', // 3
+'speedometer', // 4
+'gasoline', // 5
+'teleport', // 6
+'screws', // 7
+'spray', // 8
+'up', // 9
+// Для добычи руды
+'cracks', // 10
+'ore'; // 11
+
+// Позиции для 16 фреймов
+$cursorEffectSpriteFramePositionX: 
+    0%,       // 1
+    $frame-size,    // 2
+    $frame-size*2,    // 3
+    $frame-size*3,   // 4
+    $frame-size*4,      // 5
+    $frame-size*5,   // 6
+    $frame-size*6,    // 7
+    $frame-size*7,   // 8
+    $frame-size*8,      // 9
+    $frame-size*9,   // 10
+    $frame-size*10,    // 11
+    $frame-size*11,   // 12
+    $frame-size*12,      // 13
+    $frame-size*13,   // 14
+    $frame-size*14,    // 15
+    $frame-size*15;   // 16
+
+// * Анимации
+// Aнимации для нескольких одновременно
+@keyframes cursorClickEffect_opacity {
+    0%, 100% {opacity: 0;}
+    15%, 85% {opacity: 1;}
+}
+@keyframes cursorClickEffect_rain {
+    0%, 100% {transform: $cursor-effect-center scale(0);}
+    50% {transform: $cursor-effect-center scale(1.2);}
+}
+@keyframes cursorClickEffect_-360deg {
+    0%, 100% {opacity: 0;}
+    15%, 85% {opacity: 1;}
+    0%{transform: $cursor-effect-center rotate(-360deg);}
+}
+// Индивидуальные анимации
+@keyframes cursorClickEffect_360deg {
+    // Помимо вращения есть увеличение
+    0%, 100% {
+        transform: $cursor-effect-center rotate(0deg) scale(1.6);
+        opacity: 0;
+    }
+    50%{
+        transform: $cursor-effect-center rotate(-360deg) scale(1.6);
+        opacity: 1;
+    }
+}
+@keyframes cursorClickEffect_-280deg {
+    0%, 100% {opacity: 0;}
+    15%, 85% {opacity: 1;}
+    50%{transform: $cursor-effect-center rotate(240deg);}
+}
+@keyframes cursorClickEffect_spray {
+    0%, 100% {
+        opacity: 0;
+        transform: $cursor-effect-center translateX(20%) translateY(10%) scale(.7) rotate(15deg);
+    }
+    30% {
+        opacity: 1;
+        transform: $cursor-effect-center translateX(-30%) translateY(10%) scale(.7) rotate(15deg);
+    }
+    70% {
+        opacity: 1;
+        transform: $cursor-effect-center translateX(20%) translateY(10%) scale(.7) rotate(15deg);
+    }
+
+}
+@keyframes cursorClickEffect_drip {
+    0%, 80%, 100% {
+        opacity: 0;
+    }
+    0% {
+        transform: $cursor-effect-center translateX(-50%) translateY(-10%) scale(.7);
+    }
+    20% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+        transform: $cursor-effect-center translateX(-50%) translateY(20%) scale(.7);
+    }
+    100% {
+        transform: $cursor-effect-center translateX(-50%) translateY(20%) scale(.7);
+    }
+}
+@keyframes cursorClickEffect_up {
+    0%, 100% {
+        opacity: 0;
+    }
+    0% {
+        opacity: 1;
+        transform: $cursor-effect-center translateY(0%);
+    }
+    90% {
+        opacity: 1;
+        transform: $cursor-effect-center translateY(-35%);
+    }
+    100% {
+        transform: $cursor-effect-center translateY(-35%);
+    }
+}
+
+// * Миксин для позиционирования фреймов спрайта и применения анимации
+@mixin cursorEffectSpriteFrame($_className, $_bgPositionX, $_animationName) {
+    // Выбираю число из массива
+    &--active-#{nth($cursorEffectNames, $_className)} {
+        background: url('sprite.png');
+        background-size: $cursor-effect-diameter*$cursor-effects-count $cursor-effect-diameter;
+        background-position: nth($cursorEffectSpriteFramePositionX, $_bgPositionX) 0%; // Фрейм спрайта из массива
+        animation: cursorClickEffect_#{$_animationName} 1s infinite;
+    }
+}
+
+
+
+.cursor-click-effect {
+    // Общие стили
+    &, &-1, &-2 {
+        position: fixed;
+        width: $cursor-effect-diameter;
+        height: $cursor-effect-diameter;
+        transform: $cursor-effect-center;
+        pointer-events: none;
+        &--inactive {display: none;}
+    }
+    // z-индексы
+    z-index: $cursor-effect-z-index;
+    &-1 {z-index: $cursor-effect-z-index+1;}
+    &-2 {z-index: $cursor-effect-z-index+2;}
+
+    // Подключаю миксин для позиционирования фреймов спрайта и применения анимации
+    @include cursorEffectSpriteFrame(1, 1, 'rain');
+    @include cursorEffectSpriteFrame(2, 2, 'rain');
+    @include cursorEffectSpriteFrame(3, 3, '-360deg');
+
+    @include cursorEffectSpriteFrame(4, 4, 'opacity');
+    &-1 {@include cursorEffectSpriteFrame(4, 5, '-280deg')}
+    &-2 {@include cursorEffectSpriteFrame(4, 6, '360deg')}
+
+    @include cursorEffectSpriteFrame(5, 7, 'opacity');
+    &-1 {@include cursorEffectSpriteFrame(5, 8, 'drip')}
+
+    @include cursorEffectSpriteFrame(6, 9, 'opacity');
+    &-1 {@include cursorEffectSpriteFrame(6, 10, '-360deg')}
+
+    @include cursorEffectSpriteFrame(7, 11, 'rain');
+
+    @include cursorEffectSpriteFrame(8, 12, 'opacity');
+    &-1 {@include cursorEffectSpriteFrame(8, 13, 'spray')}
+
+    @include cursorEffectSpriteFrame(9, 14, 'up');
+    @include cursorEffectSpriteFrame(10, 15, 'opacity');
+    @include cursorEffectSpriteFrame(11, 16, 'rain');
+}
