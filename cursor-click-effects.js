@@ -27,19 +27,19 @@ const cursorClickEffectTimeout = 1000; // Таймаут для анимации
 
 // Модификаторы кнопок для визуальных эффектов
 // Для покупки
-const btnsEffectMoney = document.querySelectorAll('.btn--effect-money');
-const btnsEffectGems = document.querySelectorAll('.btn--effect-gems');
+const elementsEffectMoney = document.querySelectorAll('.element--effect-money');
+const elementsEffectGems = document.querySelectorAll('.element--effect-gems');
 // Для такси
-const btnsEffectWheel = document.querySelectorAll('.btn--effect-wheel');
-const btnsEffectScrews = document.querySelectorAll('.btn--effect-screws');
-const btnsEffectSpeedometer = document.querySelectorAll('.btn--effect-speedometer');
-const btnsEffectGasoline = document.querySelectorAll('.btn--effect-gasoline');
-const btnsEffectTeleport = document.querySelectorAll('.btn--effect-teleport');
-const btnsEffectSpray = document.querySelectorAll('.btn--effect-spray');
-const btnsEffectUp = document.querySelectorAll('.btn--effect-up');
+const elementsEffectWheel = document.querySelectorAll('.element--effect-wheel');
+const elementsEffectScrews = document.querySelectorAll('.element--effect-screws');
+const elementsEffectSpeedometer = document.querySelectorAll('.element--effect-speedometer');
+const elementsEffectGasoline = document.querySelectorAll('.element--effect-gasoline');
+const elementsEffectTeleport = document.querySelectorAll('.element--effect-teleport');
+const elementsEffectSpray = document.querySelectorAll('.element--effect-spray');
+const elementsEffectUp = document.querySelectorAll('.element--effect-up');
 // Для добычи руды
-const btnsEffectCracks = document.querySelectorAll('.btn--effect-cracks');
-const btnsEffectOre = document.querySelectorAll('.btn--effect-ore');
+const elementsEffectCracks = document.querySelectorAll('.element--effect-cracks');
+const elementsEffectOre = document.querySelectorAll('.element--effect-ore');
 
 // Массив с ключевыми словами эффектов
 const cursorClickEffectNames = [
@@ -110,19 +110,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Для покупки
-        addCursorClickEffect(btnsEffectMoney, cursorClickEffectNames[0]);
-        addCursorClickEffect(btnsEffectGems, cursorClickEffectNames[1]);
+        addCursorClickEffect(elementsEffectMoney, cursorClickEffectNames[0]);
+        addCursorClickEffect(elementsEffectGems, cursorClickEffectNames[1]);
         // Для такси
-        addCursorClickEffect(btnsEffectWheel, cursorClickEffectNames[2]);
-        addCursorClickEffect(btnsEffectSpeedometer, cursorClickEffectNames[3]);
-        addCursorClickEffect(btnsEffectGasoline, cursorClickEffectNames[4]);
-        addCursorClickEffect(btnsEffectTeleport, cursorClickEffectNames[5]);
-        addCursorClickEffect(btnsEffectScrews, cursorClickEffectNames[6]);
-        addCursorClickEffect(btnsEffectSpray, cursorClickEffectNames[7]);
-        addCursorClickEffect(btnsEffectUp, cursorClickEffectNames[8]);
+        addCursorClickEffect(elementsEffectWheel, cursorClickEffectNames[2]);
+        addCursorClickEffect(elementsEffectSpeedometer, cursorClickEffectNames[3]);
+        addCursorClickEffect(elementsEffectGasoline, cursorClickEffectNames[4]);
+        addCursorClickEffect(elementsEffectTeleport, cursorClickEffectNames[5]);
+        addCursorClickEffect(elementsEffectScrews, cursorClickEffectNames[6]);
+        addCursorClickEffect(elementsEffectSpray, cursorClickEffectNames[7]);
+        addCursorClickEffect(elementsEffectUp, cursorClickEffectNames[8]);
         // Для добычи руды
-        addCursorClickEffect(btnsEffectCracks, cursorClickEffectNames[9]);
-        addCursorClickEffect(btnsEffectOre, cursorClickEffectNames[10]);
+        addCursorClickEffect(elementsEffectCracks, cursorClickEffectNames[9]);
+        addCursorClickEffect(elementsEffectOre, cursorClickEffectNames[10]);
 
         // Инициализация позиции курсора при загрузке
         changeCursorState('', 'deactivation');
