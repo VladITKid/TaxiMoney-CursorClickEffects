@@ -1,5 +1,4 @@
-
-![Без названия452_20241111213300](https://github.com/user-attachments/assets/56b82a8b-84ad-4c9c-834b-0a8fb0180b78)
+![Без названия452_20241130143407](https://github.com/user-attachments/assets/ca9eb420-30be-43f2-a22f-789f820ad758)
 
 # Click effects — Elements Animation
 ## Description
